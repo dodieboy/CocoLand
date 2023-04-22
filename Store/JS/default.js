@@ -80,6 +80,7 @@ function nav_check() {
 		$("#navLogin").html('<a href="logout.php">Logout Now</a>');
 		if(role_check("A")){
             $("#navHome").html('<a href="admin.html">Admin</a>');
+            return;
         }
         $("#navHome").html('<a href="index.html">Store</a>');
 	}
