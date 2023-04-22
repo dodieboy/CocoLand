@@ -8,27 +8,26 @@ $(document).ready(function() {
 });
 
 function price() {
-    $.ajax({
-        type: "POST",
-        url: 'store.php',
-        dataType: 'json',
-        success: function(data) {
-            $('#itemName1').html(data[0]);
-            $('#itemName2').html(data[2]);
-            $('#itemName3').html(data[4]);
-
-            $('#itemPrice1').html('$' + data[1] + ' &#127851;');
-            $('#itemPrice2').html('$' + data[3] + ' &#127851;');
-            $('#itemPrice3').html('$' + data[5] + ' &#127851;');
-
-            $('#itemPrice1').val('$' + data[1]);
-            $('#itemPrice2').val('$' + data[3]);
-            $('#itemPrice3').val('$' + data[5]);
-        },
-        error: function() {
-            alert("error");
+    $.getJSON("json/product.json", function(data){
+        data = data.product;
+        if(data.length == 0) {
+            console.log("Error: no product found!");
+            return false;
         }
-    })
+            $('#itemName1').html(data[0].product_name);
+            $('#itemName2').html(data[1].product_name);
+            $('#itemName3').html(data[2].product_name);
+
+            $('#itemPrice1').html('$' + data[0].price + ' &#127851;');
+            $('#itemPrice2').html('$' + data[1].price + ' &#127851;');
+            $('#itemPrice3').html('$' + data[2].price + ' &#127851;');
+
+            $('#itemPrice1').val('$' + data[0].price);
+            $('#itemPrice2').val('$' + data[1].price);
+            $('#itemPrice3').val('$' + data[2].price);
+    }).fail(function(){
+        console.log("An error has occurred.");
+    });
 }
 
 function addCart(pId, pName, pPrice, buttons) {

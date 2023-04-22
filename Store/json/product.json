@@ -1,0 +1,19 @@
+{
+    "product": [
+      {
+        "id": "1",
+        "product_name": "Hershey's Milk Chocolate (10 bar)",
+        "price": "19.99"
+      },
+      {
+        "id": "2",
+        "product_name": "Hershey's Skor Candy Bar (10 bar)",
+        "price": "26.99"
+      },
+      {
+        "id": "3",
+        "product_name": "Hershey's Krackel Chocolate Bar (10 bar)",
+        "price": "45.99"
+      }
+    ]
+}
