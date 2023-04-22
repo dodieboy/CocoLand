@@ -1,0 +1,24 @@
+{
+    "user": [
+      {
+        "id": "0",
+        "username": "admin",
+        "name": "admin",
+        "password": "21232f297a57a5a743894a0e4a801fc3",
+        "email": "admim@admin.com",
+        "gender": "M",
+        "phone": 99999999,
+        "role": "A"
+      },
+      {
+        "id": "1",
+        "username": "alan",
+        "name": "alan",
+        "password": "21232f297a57a5a743894a0e4a801fc3",
+        "email": "alan@alan.com",
+        "gender": "M",
+        "phone": 12341234,
+        "role": "N"
+      }
+    ]
+}

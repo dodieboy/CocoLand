@@ -1,0 +1,22 @@
+{
+    "session": [
+      {
+        "token": "1234567890",
+        "typ": "JWT",
+        "alg": "HS256",
+        "iat": "9999999999",
+        "user_id": "0",
+        "role": "A",
+        "signature": "for prototyping only"
+      },
+      {
+        "token": "123443210",
+        "typ": "JWT",
+        "alg": "HS256",
+        "iat": "9999999999",
+        "user_id": "1",
+        "role": "N",
+        "signature": "for prototyping only"
+      }
+    ]
+}
