@@ -3,8 +3,13 @@ SPDX-Short-Identifier: MIT
 (c) 2019 Alan Tan
 This code is licensed under MIT license (See LICENSE.txt for details)
 */
+$.ajaxSetup({
+    async: false
+});
+
 $(document).ready(function () {
-	nav_login();
+    Cookies.set('JWT', '1234567890', { sameSite: 'strict' });
+	nav_check();
 	if ($(window).width() < 777) {
 		cart_check("mobile");
 	} else {
@@ -28,9 +33,6 @@ $(window).resize(function () {
 });
 
 function session_val(token) {
-    $.ajaxSetup({
-        async: false
-    });
     var result = false;
     $.getJSON("json/session.json", {}, function(data) {
 		var data = data.session;
@@ -42,7 +44,6 @@ function session_val(token) {
 				}
 			}
 		}
-        return false;
 	}).fail(function () {
 		console.log("Error: failed to connect to JWT server!");
 	})
@@ -50,7 +51,6 @@ function session_val(token) {
 }
 
 function login_check() {
-    console.log(session_val(Cookies.get("JWT")));
 	if (Cookies.get("JWT") && session_val(Cookies.get("JWT"))) {
 		return true;
 	}
@@ -58,20 +58,32 @@ function login_check() {
 }
 
 function role_check(r) {
-	if (!login_check()) {
-		return false;
-	}
-
-
-	return;
+    var result = false;
+    $.getJSON("json/session.json", {}, function(data) {
+        var data = data.session;
+        if (data.length !== 0) {
+            for (let i = 0; i < data.length; i++) {
+                if (data[i].token === Cookies.get("JWT") && data[i].role === r) {
+                    result = true;
+                    return;
+                }
+            }
+        }
+    }).fail(function () {
+        console.log("Error: failed to connect to JWT server!");
+    })
+    return result;
 }
 
-function nav_login() {
+function nav_check() {
 	if (login_check()) {
 		$("#navLogin").html('<a href="logout.php">Logout Now</a>');
-		return;
+		if(role_check("A")){
+            $("#navHome").html('<a href="admin.html">Admin</a>');
+        }
+        $("#navHome").html('<a href="index.html">Store</a>');
 	}
-	$("#navLogin").html('<a href="login.html">Login Now</a>');
+	$("#navLogin").html('<a href="login.html">Login Now</a>'); 
 }
 
 function cart_check(i) {
