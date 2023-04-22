@@ -12,7 +12,7 @@ function price() {
 		data = data.product;
 		if (data.length == 0) {
 			console.log("Error: no product found!");
-			return false;
+			return;
 		}
 		$("#itemName1").html(data[0].product_name);
 		$("#itemName2").html(data[1].product_name);
