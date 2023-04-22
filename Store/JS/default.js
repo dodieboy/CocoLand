@@ -8,7 +8,7 @@ $.ajaxSetup({
 });
 
 $(document).ready(function () {
-    Cookies.set('JWT', '1234567890', { sameSite: 'strict' });
+    //Cookies.set('JWT', '1234567890', { sameSite: 'strict' });
 	nav_check();
 	if ($(window).width() < 777) {
 		cart_check("mobile");
