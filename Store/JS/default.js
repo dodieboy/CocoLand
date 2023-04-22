@@ -4,7 +4,7 @@ SPDX-Short-Identifier: MIT
 This code is licensed under MIT license (See LICENSE.txt for details)
 */
 $(document).ready(function() {
-    login_check();
+    //login_check();
     if ($(window).width() < 777) {
         cart_check('mobile');
     } else {
@@ -60,23 +60,13 @@ function login_check() {
 }
 
 function cart_check(i) {
-    if (i == "mobile") {
-        $.ajax({
-            type: "POST",
-            url: 'cartCheck.php',
-            success: function(data) {
-                $("#navCart").html("Cart (" + data + ")");
-            }
-        })
-
-    } else {
-        $.ajax({
-            type: "POST",
-            url: 'cartCheck.php',
-            success: function(data) {
-                $("#navCart").html("Cart&#65077;" + data + "&#65078;");
-            }
-        })
+    if ($.session.get("cart") !== undefined) {
+        var cart = JSON.parse("[" + $.session.get("cart") + "]")[0];
+        if (i == "mobile") {
+            $("#navCart").html("Cart (" + cart.length + ")");
+            return;
+        }
+        $("#navCart").html("Cart&#65077;" + cart.length + "&#65078;");
     }
 }
 
