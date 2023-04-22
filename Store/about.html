@@ -20,33 +20,13 @@ This code is licensed under MIT license (See LICENSE.txt for details)
 </head>
 
 <body>
-    <div class="bg">
-        <video poster="img/BG.PNG" muted webkit-playsinline playsinline autoplay loop>
-                    <source src="img/Bg.mp4" type="video/mp4">
-                    <source src="img/Bg.webm" type="video/webm">
-        </video>
-    </div>
-    <div class="header">
-        <div class="logo"><img src="img/logo1.png" />
-            <p class="UName"></p>
-        </div>
-        <div class="menu">
-            <nav>
-                <ul>
-                    <a href="javascript:void(0);" class="navIcon">
-                        <i class="fa fa-bars"></i> Menu
-                    </a>
-                    <div class="nav">
-                        <li id="navLogin"></li>
-                        <li><a href="contact.html">Contact Us</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="index.html">Store</a></li>
-                        <li><a href="cart.html" id="navCart">Cart&#65077;0&#65078;</a></li>
-                    </div>
-                </ul>
-            </nav>
-        </div>
-    </div>
+    <script> 
+        $(function(){ $(".bg").load("bg.html") });
+        $(function(){ $(".header").load("header.html") });
+        $(function(){ $("#footer").load("footer.html") });
+    </script>
+    <div class="bg"></div>
+    <div class="header"></div>
     <section class="layout-top">
         <div class="box1"> </div>
     </section>
@@ -62,17 +42,7 @@ This code is licensed under MIT license (See LICENSE.txt for details)
                 <p>We offer unlimited type of chocolate for chocolate lover. It is find by Alan Tan at 2018. He belive that chocolate is love, chocolate is life, and he want to spead the happiness with others all round.</p>
             </article>
         </section>
-        <footer class="section" id="footer">
-            <div id="social">
-                <ul>
-                    <li><i class="fab fa-facebook"></i></li>
-                    <li><i class="fab fa-instagram"></i></li>
-                    <li><i class="fab fa-twitter-square"></i></li>
-                    <li><i class="fab fa-telegram"></i></li>
-                </ul>
-                <p>© 2018 Cocoland Inc. All Rights Reserved</p>
-            </div>
-        </footer>
+        <footer class="section" id="footer"></footer>
     </div>
 </body>
 

@@ -21,12 +21,11 @@ This code is licensed under MIT license (See LICENSE.txt for details)
 </head>
 
 <body>
-    <div class="bg">
-        <video poster="img/BG.PNG" muted webkit-playsinline playsinline autoplay loop>
-                    <source src="img/Bg.mp4" type="video/mp4">
-                    <source src="img/Bg.webm" type="video/webm">
-                </video>
-    </div>
+    <script> 
+        $(function(){ $(".bg").load("bg.html") });
+        $(function(){ $("#footer").load("footer.html") });
+    </script>
+    <div class="bg"></div>
     <div class="gridContainer clearfix">
         <div class="header">
             <div class="logo"><img src="img/logo1.png" />
@@ -67,17 +66,7 @@ This code is licensed under MIT license (See LICENSE.txt for details)
             </div>
         </div>
     </section>
-    <footer id="footer">
-        <div id="social">
-            <ul>
-                <li><i class="fab fa-facebook"></i></li>
-                <li><i class="fab fa-instagram"></i></li>
-                <li><i class="fab fa-twitter-square"></i></li>
-                <li><i class="fab fa-telegram"></i></li>
-            </ul>
-            <p>© 2018 Cocoland Inc. All Rights Reserved</p>
-        </div>
-    </footer>
+    <footer id="footer"></footer>
 </body>
 
 </html>

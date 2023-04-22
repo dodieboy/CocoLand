@@ -22,12 +22,10 @@ This code is licensed under MIT license (See LICENSE.txt for details)
 </head>
 
 <body>
-    <div class="bg">
-        <video poster="img/BG.PNG" muted webkit-playsinline playsinline autoplay loop>
-            <source src="img/Bg.mp4" type="video/mp4">
-            <source src="img/Bg.mp4" type="video/mp4">
-        </video>
-    </div>
+    <script> 
+        $(function(){ $(".bg").load("bg.html") });
+    </script>
+    <div class="bg"></div>
     <div id="fullpage">
         <div class="section">
             <div class="Container_layout">
