@@ -29,21 +29,10 @@ $(document).ready(function() {
         })
     })
     $("#register").on("submit", function(e) {
+        //this is just a demo and account will not be able to login
         e.preventDefault();
         var tempPass = $.md5($('#password').val());
-        $.ajax({
-            type: "POST",
-            url: 'register.php',
-            data: $(this).serialize() + "&md5Password=" + tempPass,
-            success: function(data) {
-                alert(data);
-                if (data.indexOf('Successfully') >= 0) {
-                    window.location = 'login.html';
-                } else {
-                    $('#password').val("");
-                }
-            }
-        })
+        window.location = 'login.html';
     })
 })
 
