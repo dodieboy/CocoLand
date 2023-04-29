@@ -74,7 +74,7 @@ function showTable() {
         for(var i = 0; i < cart.length; i++){
             console.log(getPPrice(cart[i].Id));
             console.log(cart[i].q);
-            tables += "<tr class='uData' title='Click to edit'><td class='pName'>" + getPName(cart[i].Id) + "</td><td><input onKeyUp='updateTable(" + cart[i].Id + ")' type='text' class='pQuantity' value='" + cart[i].q + "'></td><td class='pPrice'>$" + getPPrice(cart[i].Id) + "</td><td class='total'>$" + (getPPrice(cart[i].Id) * cart[i].q).toFixed(2) + "</td><td><button type='button' onClick='removeProduce(" + cart[i].id + ")'><i class='fas fa-trash'></i></button></td><td style='display:none' class='pId'>" + cart[i].id + "</td></tr>"
+            tables += "<tr class='uData' value='" + cart[i].Id + "'><td class='pName'>" + getPName(cart[i].Id) + "</td><td><input onKeyUp='updateTable(" + cart[i].Id + ")' type='text' class='pQuantity' value='" + cart[i].q + "'></td><td class='pPrice'>$" + getPPrice(cart[i].Id) + "</td><td class='total'>$" + (getPPrice(cart[i].Id) * cart[i].q).toFixed(2) + "</td><td><button type='button' onClick='removeProduce(" + cart[i].id + ")'><i class='fas fa-trash'></i></button></td></tr>"
         }
         tables += "<tr class='tableTotal'><td></td><td></td><td>Total:</td><td id='sumTotal'></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td><button type='button' onClick='checkOut()' title='Check out now'>Check Out</button></td></tr></table>"
         tables += "<script src='JS/cleave.min.js'></script><script>var cleave = new Cleave('.pQuantity', {numeral: true,numeralThousandsGroupStyle: 'thousand'});</script>"
