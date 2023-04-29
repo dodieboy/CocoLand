@@ -66,7 +66,7 @@ function sumTotal() {
 }
 
 function showTable() {
-    if ($.session.get("cart") === undefined) {
+    if ($.session.get("cart") === undefined || $.session.get("cart").length < 3) {
 		$('#table').html("<p>Cart is empty</p>");
 	} else {
 		var cart = JSON.parse("[" + $.session.get("cart") + "]")[0];
