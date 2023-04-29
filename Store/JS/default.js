@@ -82,9 +82,9 @@ function nav_check() {
             $("#navHome").html('<a href="admin.html">Admin</a>');
             return;
         }
-        $("#navHome").html('<a href="index.html">Store</a>');
 	}
-	$("#navLogin").html('<a href="login.html">Login Now</a>'); 
+	$("#navLogin").html('<a href="login.html">Login Now</a>');
+	$("#navHome").html('<a href="index.html">Store</a>'); 
 }
 
 function cart_check(i) {
