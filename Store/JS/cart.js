@@ -59,7 +59,7 @@ function getPPrice(id) {
 function sumTotal() {
     var y = 0;
     for (var i = 1; i < $('#cartTable tr').length; i++) {
-        var total = $('#cartTable').find('tr:eq(' + i + ')').find('td.total').text().replace(/[$]/g, '')
+        var total = $('#cartTable').find('tr:eq(' + i + ')').find('td#total').text().replace(/[$]/g, '')
         y = (y + total * 1);
     }
     $("#sumTotal").html('$' + y.toFixed(2));
@@ -72,30 +72,34 @@ function showTable() {
 		var cart = JSON.parse("[" + $.session.get("cart") + "]")[0];
         var tables = "<table align=center id='cartTable'><tr><th id='tName'>Product Name</th><th id='tQuantity'>Quantity</th><th id='tPrice'>Price</th><th id='tTotal'>Total</th><th id='tDelete'>Delete</th></tr>";
         for(var i = 0; i < cart.length; i++){
-            console.log(getPPrice(cart[i].Id));
-            console.log(cart[i].q);
-            tables += "<tr class='uData' value='" + cart[i].Id + "'><td class='pName'>" + getPName(cart[i].Id) + "</td><td><input onKeyUp='updateTable(" + cart[i].Id + ")' type='text' class='pQuantity' value='" + cart[i].q + "'></td><td class='pPrice'>$" + getPPrice(cart[i].Id) + "</td><td class='total'>$" + (getPPrice(cart[i].Id) * cart[i].q).toFixed(2) + "</td><td><button type='button' onClick='removeProduce(" + cart[i].id + ")'><i class='fas fa-trash'></i></button></td></tr>"
+            tables += "<tr class='uData'><td class='pName'>" + getPName(cart[i].Id) + "</td><td><input onchange='updateQuality(" + cart[i].Id + ", this);' type='text' class='pQuantity' value='" + cart[i].q + "'></td><td class='pPrice'>$" + getPPrice(cart[i].Id) + "</td><td id='total'>$" + (getPPrice(cart[i].Id) * cart[i].q).toFixed(2) + "</td><td><button type='button' onClick='removeProduce(" + cart[i].id + ")'><i class='fas fa-trash'></i></button></td></tr>"
         }
         tables += "<tr class='tableTotal'><td></td><td></td><td>Total:</td><td id='sumTotal'></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td><button type='button' onClick='checkOut()' title='Check out now'>Check Out</button></td></tr></table>"
         tables += "<script src='JS/cleave.min.js'></script><script>var cleave = new Cleave('.pQuantity', {numeral: true,numeralThousandsGroupStyle: 'thousand'});</script>"
         $('#table').html(tables);
         sumTotal()
-        console.log(cart);
 	}
 }
 
 
 var timeout = null;
 
-function updateTable(row) {
+function updateQuality(id, node) {
+    console.dir(node);
+    var quality = node.value;
     clearTimeout(timeout);
     timeout = setTimeout(function() {
-        var quantity = $('#cartTable').find('tr:eq(' + row + ')').find('input').val();
-        var price = $('#cartTable').find('tr:eq(' + row + ')').children('td.pPrice').text().replace(/[$]/g, '');
-        var total = (quantity * price).toFixed(2);
-        sumTotal()
-        $('#cartTable').find('tr:eq(' + row + ')').children('td.total').text("$" + total);
-        updateTable2();
+        var product = JSON.parse($.session.get("cart"));
+        for (let i = 0; i < product.length; i++) {
+            if (product[i].Id === id) {
+                product[i].q = quality;
+                break;
+            }
+        }
+        product = JSON.stringify(product);
+        $.session.set("cart", product);
+        $(node).parent().parent().children('td#total').text("$" + (getPPrice(id) * quality));
+        sumTotal();
     }, 400);
 };
 
@@ -109,39 +113,12 @@ function updateTable2() {
         var pName = $('#cartTable').find('tr:eq(' + i + ')').find('td.pName').text();
         var pQuantity = $('#cartTable').find('tr:eq(' + i + ')').find('input').val();
         var pPrice = $('#cartTable').find('tr:eq(' + i + ')').children('td.pPrice').text().replace(/[$]/g, '');
-        if (pName == "") {} else {
-            $.ajax({
-                type: "POST",
-                url: 'addCart.php',
-                data: {
-                    type: "update" + i,
-                    id: pId,
-                    name: pName,
-                    price: pPrice.replace(/[$]/g, ''),
-                    quantity: pQuantity
-                },
-                error: function() {
-                    alert("error");
-                }
-            })
-        }
     }
 }
 
 function clearCart() {
-    $.ajax({
-        type: "POST",
-        url: 'addCart.php',
-        data: {
-            type: "clear"
-        },
-        success: function(data) {
-            showTable();
-        },
-        error: function() {
-            alert("error");
-        }
-    })
+    $.session.remove("cart");
+    $('#table').html("<p>Cart is empty</p>");
 }
 
 function removeProduce(row) {
