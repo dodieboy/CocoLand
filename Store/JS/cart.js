@@ -72,7 +72,7 @@ function showTable() {
 		var cart = JSON.parse("[" + $.session.get("cart") + "]")[0];
         var tables = "<table align=center id='cartTable'><tr><th id='tName'>Product Name</th><th id='tQuantity'>Quantity</th><th id='tPrice'>Price</th><th id='tTotal'>Total</th><th id='tDelete'>Delete</th></tr>";
         for(var i = 0; i < cart.length; i++){
-            tables += "<tr class='uData'><td class='pName'>" + getPName(cart[i].Id) + "</td><td><input onchange='updateQuality(" + cart[i].Id + ", this);' type='text' class='pQuantity' value='" + cart[i].q + "'></td><td class='pPrice'>$" + getPPrice(cart[i].Id) + "</td><td id='total'>$" + (getPPrice(cart[i].Id) * cart[i].q).toFixed(2) + "</td><td><button type='button' onClick='removeProduce(" + cart[i].id + ")'><i class='fas fa-trash'></i></button></td></tr>"
+            tables += "<tr class='uData'><td class='pName'>" + getPName(cart[i].Id) + "</td><td><input onchange='updateQuality(" + cart[i].Id + ", this);' type='text' class='pQuantity' value='" + cart[i].q + "'></td><td class='pPrice'>$" + getPPrice(cart[i].Id) + "</td><td id='total'>$" + (getPPrice(cart[i].Id) * cart[i].q).toFixed(2) + "</td><td><button type='button' onClick='removeProduce(" + cart[i].Id + ")'><i class='fas fa-trash'></i></button></td></tr>"
         }
         tables += "<tr class='tableTotal'><td></td><td></td><td>Total:</td><td id='sumTotal'></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td><button type='button' onClick='checkOut()' title='Check out now'>Check Out</button></td></tr></table>"
         tables += "<script src='JS/cleave.min.js'></script><script>var cleave = new Cleave('.pQuantity', {numeral: true,numeralThousandsGroupStyle: 'thousand'});</script>"
@@ -85,7 +85,6 @@ function showTable() {
 var timeout = null;
 
 function updateQuality(id, node) {
-    console.dir(node);
     var quality = node.value;
     clearTimeout(timeout);
     timeout = setTimeout(function() {
@@ -119,12 +118,15 @@ function updateTable2() {
 function clearCart() {
     $.session.remove("cart");
     $('#table').html("<p>Cart is empty</p>");
+    cart_check();
 }
 
-function removeProduce(row) {
-    $('#cartTable').find('tr:eq(' + row + ')').remove();
-    updateTable2();
+function removeProduce(id) {
+    var product = JSON.parse($.session.get("cart"));
+    product = JSON.stringify(product.filter(function(el) { return el.Id != id; }));
+	$.session.set("cart", product);
     showTable();
+    cart_check();
 }
 
 function checkOut() {
