@@ -357,6 +357,10 @@ video {
 .tableTotal td {
     padding-top: 10px;
 }
+
+#table {
+    clear: both;
+}
 /*###################
     footer
 ###################*/
