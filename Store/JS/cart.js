@@ -1,4 +1,6 @@
-
+$.ajaxSetup({
+    async: false
+});
 $(document).ready(function() {
     showTable();
     $('#btnRefresh').click(function(event) {
@@ -16,32 +18,42 @@ $(document).ready(function() {
     })
 });
 
-function showTable() {
-    $.ajax({
-        type: "POST",
-        url: 'cart.php',
-        dataType: 'json',
-        success: function(data) {
-            cart_check();
-            if (data == '"empty"' || data == 'empty') {
-                $('#table').html("<p>Cart is empty</p>");
-            } else {
-                var tables = "<table align=center id='cartTable'><tr><th id='tName'>Product Name</th><th id='tQuantity'>Quantity</th><th id='tPrice'>Price</th><th id='tTotal'>Total</th><th id='tDelete'>Delete</th></tr>";
-                var x = 0;
-                for (var i = 0; i < (data.length / 4); i++) {
-                    tables += "<tr class='uData' title='Click to edit'><td class='pName'>" + data[x + 1] + "</td><td><input onKeyUp='updateTable(" + (x + 4) / 4 + ")' type='text' class='pQuantity' value='" + data[x + 3] + "'></td><td class='pPrice'>$" + data[x + 2] + "</td><td class='total'>$" + (data[x + 3] * data[x + 2]).toFixed(2) + "</td><td><button type='button' onClick='removeProduce(" + (x + 4) / 4 + ")'><i class='fas fa-trash'></i></button></td><td style='display:none' class='pId'>" + data[x] + "</td></tr>"
-                    x += 4
-                }
-                tables += "<tr class='tableTotal'><td></td><td></td><td>Total:</td><td id='sumTotal'></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td><button type='button' onClick='checkOut()' title='Check out now'>Check Out</button></td></tr></table>"
-                tables += "<script src='JS/cleave.min.js'></script><script>var cleave = new Cleave('.pQuantity', {numeral: true,numeralThousandsGroupStyle: 'thousand'});</script>"
-                $('#table').html(tables);
-                sumTotal()
+function getPName(id) {
+    var result;
+	$.getJSON("json/product.json", function (data) {
+		if (data.product.length == 0) {
+			console.log("Error: no product found!");
+			return false;
+		}
+        $.each(data.product, function(i, v) {
+            if (v.id == id) {
+                result = v.product_name;
+                return false;
             }
-        },
-        error: function() {
-            alert("error");
-        }
-    })
+        });
+	}).fail(function () {
+		console.log("An error has occurred.");
+	});
+    return result;
+}
+
+function getPPrice(id) {
+    var result;
+	$.getJSON("json/product.json", function (data) {
+		if (data.product.length == 0) {
+			console.log("Error: no product found!");
+			return false;
+		}
+        $.each(data.product, function(i, v) {
+            if (v.id == id) {
+                result = v.price;
+                return false;
+            }
+        });
+	}).fail(function () {
+		console.log("An error has occurred.");
+	});
+    return result;
 }
 
 function sumTotal() {
@@ -52,6 +64,26 @@ function sumTotal() {
     }
     $("#sumTotal").html('$' + y.toFixed(2));
 }
+
+function showTable() {
+    if ($.session.get("cart") === undefined) {
+		$('#table').html("<p>Cart is empty</p>");
+	} else {
+		var cart = JSON.parse("[" + $.session.get("cart") + "]")[0];
+        var tables = "<table align=center id='cartTable'><tr><th id='tName'>Product Name</th><th id='tQuantity'>Quantity</th><th id='tPrice'>Price</th><th id='tTotal'>Total</th><th id='tDelete'>Delete</th></tr>";
+        for(var i = 0; i < cart.length; i++){
+            console.log(getPPrice(cart[i].Id));
+            console.log(cart[i].q);
+            tables += "<tr class='uData' title='Click to edit'><td class='pName'>" + getPName(cart[i].Id) + "</td><td><input onKeyUp='updateTable(" + cart[i].Id + ")' type='text' class='pQuantity' value='" + cart[i].q + "'></td><td class='pPrice'>$" + getPPrice(cart[i].Id) + "</td><td class='total'>$" + (getPPrice(cart[i].Id) * cart[i].q).toFixed(2) + "</td><td><button type='button' onClick='removeProduce(" + cart[i].id + ")'><i class='fas fa-trash'></i></button></td><td style='display:none' class='pId'>" + cart[i].id + "</td></tr>"
+        }
+        tables += "<tr class='tableTotal'><td></td><td></td><td>Total:</td><td id='sumTotal'></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td><button type='button' onClick='checkOut()' title='Check out now'>Check Out</button></td></tr></table>"
+        tables += "<script src='JS/cleave.min.js'></script><script>var cleave = new Cleave('.pQuantity', {numeral: true,numeralThousandsGroupStyle: 'thousand'});</script>"
+        $('#table').html(tables);
+        sumTotal()
+        console.log(cart);
+	}
+}
+
 
 var timeout = null;
 
