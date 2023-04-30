@@ -171,11 +171,8 @@ video {
     right: 0;
 }
 
-.boxOrder {
+.layout-top .header{
     background-color: black;
-    width: 100%;
-    height: 20vh;
-    min-height: 150px;
 }
 
 .topBox {
@@ -187,17 +184,17 @@ video {
 #navCart{
     padding: 0;
 }
-.cart{
+.navCart{
     width: 36px;
     font-size: 26px;
     color: #F59C1E;
     writing-mode: lr;
     margin-top: 26px;
 }
-.cart:hover{
+.navCart:hover{
     color: #fff;
 }
-.cart:after{
+.navCart:after{
     content:attr(value);
     font-size:12px;
     color: #fff;
@@ -557,10 +554,6 @@ radio Button
     }
     .menu .nav {
         display: block;
-    }
-    .boxOrder {
-        height: 25vh;
-        min-height: 200px;
     }
     .topBox {
         height: 25vh;
