@@ -10,7 +10,7 @@ $.ajaxSetup({
 $(document).ready(function () {
 	//Cookies.set('JWT', '1234567890', { sameSite: 'strict' });
 	nav_check();
-	if ($(window).width() <= 777) {
+	if ($(window).width() <= 985) {
 		cart_check("mobile");
 	} else {
 		cart_check();
