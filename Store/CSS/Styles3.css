@@ -526,7 +526,7 @@ radio Button
     }
     .menu {
         float: right;
-        padding-right: 1%;
+        padding: 10px 30px;
         width: 23.7288%;
         clear: none;
     }
