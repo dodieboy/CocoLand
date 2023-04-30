@@ -10,7 +10,7 @@ $.ajaxSetup({
 $(document).ready(function () {
 	//Cookies.set('JWT', '1234567890', { sameSite: 'strict' });
 	nav_check();
-	if ($(window).width() < 777) {
+	if ($(window).width() <= 777) {
 		cart_check("mobile");
 	} else {
 		cart_check();
@@ -91,10 +91,10 @@ function cart_check(i) {
 	if ($.session.get("cart") !== undefined) {
 		var cart = JSON.parse("[" + $.session.get("cart") + "]")[0];
 		if (i == "mobile") {
-			$("#navCart").html("Cart (" + cart.length + ")");
+			$("#navCart").html("<i class='fa-solid fa-cart-shopping'></i> (" + cart.length + ")");
 			return;
 		}
-		$("#navCart").html("Cart&#65077;" + cart.length + "&#65078;");
+		$("i.cart").attr("value", cart.length);
 	}
 }
 
