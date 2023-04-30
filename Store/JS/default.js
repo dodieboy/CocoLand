@@ -4,11 +4,11 @@ SPDX-Short-Identifier: MIT
 This code is licensed under MIT license (See LICENSE.txt for details)
 */
 $.ajaxSetup({
-    async: false
+	async: false,
 });
 
 $(document).ready(function () {
-    //Cookies.set('JWT', '1234567890', { sameSite: 'strict' });
+	//Cookies.set('JWT', '1234567890', { sameSite: 'strict' });
 	nav_check();
 	if ($(window).width() < 777) {
 		cart_check("mobile");
@@ -33,21 +33,21 @@ $(window).resize(function () {
 });
 
 function session_val(token) {
-    var result = false;
-    $.getJSON("json/session.json", {}, function(data) {
+	var result = false;
+	$.getJSON("json/session.json", {}, function (data) {
 		var data = data.session;
-        if (data.length !== 0) {
+		if (data.length !== 0) {
 			for (let i = 0; i < data.length; i++) {
 				if (data[i].token === token) {
-                    result = true;
-                    return;
+					result = true;
+					return;
 				}
 			}
 		}
 	}).fail(function () {
 		console.log("Error: failed to connect to JWT server!");
-	})
-    return result;
+	});
+	return result;
 }
 
 function login_check() {
@@ -58,33 +58,33 @@ function login_check() {
 }
 
 function role_check(r) {
-    var result = false;
-    $.getJSON("json/session.json", {}, function(data) {
-        var data = data.session;
-        if (data.length !== 0) {
-            for (let i = 0; i < data.length; i++) {
-                if (data[i].token === Cookies.get("JWT") && data[i].role === r) {
-                    result = true;
-                    return;
-                }
-            }
-        }
-    }).fail(function () {
-        console.log("Error: failed to connect to JWT server!");
-    })
-    return result;
+	var result = false;
+	$.getJSON("json/session.json", {}, function (data) {
+		var data = data.session;
+		if (data.length !== 0) {
+			for (let i = 0; i < data.length; i++) {
+				if (data[i].token === Cookies.get("JWT") && data[i].role === r) {
+					result = true;
+					return;
+				}
+			}
+		}
+	}).fail(function () {
+		console.log("Error: failed to connect to JWT server!");
+	});
+	return result;
 }
 
 function nav_check() {
 	if (login_check()) {
 		$("#navLogin").html('<a href="logout.php">Logout Now</a>');
-		if(role_check("A")){
-            $("#navHome").html('<a href="admin.html">Admin</a>');
-            return;
-        }
+		if (role_check("A")) {
+			$("#navHome").html('<a href="admin.html">Admin</a>');
+			return;
+		}
 	}
 	$("#navLogin").html('<a href="login.html">Login Now</a>');
-	$("#navHome").html('<a href="index.html">Store</a>'); 
+	$("#navHome").html('<a href="index.html">Store</a>');
 }
 
 function cart_check(i) {

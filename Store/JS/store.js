@@ -32,7 +32,7 @@ function price() {
 
 function addCart(pId, buttons) {
 	var product;
-    var non = true;
+	var non = true;
 	if ($.session.get("cart") === undefined) {
 		product = JSON.stringify([{ Id: pId, q: 1 }]);
 	} else {
@@ -40,14 +40,14 @@ function addCart(pId, buttons) {
 		for (let i = 0; i < product.length; i++) {
 			if (product[i].Id === pId) {
 				product[i].q += 1;
-                non = false;
+				non = false;
 				break;
 			}
 		}
-        if (non){
-            product[product.length] = { Id: pId, q: 1 };
-        }
-        product = JSON.stringify(product);
+		if (non) {
+			product[product.length] = { Id: pId, q: 1 };
+		}
+		product = JSON.stringify(product);
 	}
 	$.session.set("cart", product);
 	cart_check();
