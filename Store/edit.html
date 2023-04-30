@@ -17,6 +17,7 @@ This code is licensed under MIT license (See LICENSE.txt for details)
     <script src="JS/jquery-3.3.1.min.js"></script>
     <script> 
         $(function(){ $(".bg").load("bg.html") });
+        $(function(){ $(".header").load("header.html") });
         $(function(){ $("#footer").load("footer.html") });
     </script>
     <script src="JS/fullpage.js"></script>
@@ -26,31 +27,8 @@ This code is licensed under MIT license (See LICENSE.txt for details)
 
 <body>
     <div class="bg"></div>
-    <div class="gridContainer clearfix">
-        <div class="header">
-            <div class="logo"><img src="img/logo1.png" />
-                <p class="UName"></p>
-            </div>
-            <div class="menu">
-                <nav>
-                    <ul>
-                        <a href="javascript:void(0);" class="navIcon">
-                            <i class="fa fa-bars"></i> Menu
-                        </a>
-                        <div class="nav">
-                            <li id="navLogin"></li>
-                            <li><a href="contact.html">Contact Us</a></li>
-                            <li><a href="about.html">About Us</a></li>
-                            <li><a href="index.html">Store</a></li>
-                            <li><a href="cart.html" id="navCart">Cart&#65077;0&#65078;</a></li>
-                        </div>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    </div>
     <section class="layout-top">
-        <div class="boxOrder"> </div>
+        <div class="header"></div>
     </section>
     <section class="contant">
         <div class="Container">
