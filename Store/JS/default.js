@@ -18,6 +18,9 @@ $(document).ready(function () {
 	$(".navIcon").click(function (event) {
 		nav();
 	});
+	$("#logout").click(function (event) {
+		logout();
+	});
 });
 
 $(window).resize(function () {
@@ -57,6 +60,12 @@ function login_check() {
 	return false;
 }
 
+function logout() {
+	Cookies.remove("JWT");
+	Cookies.remove("Name");
+	nav_check()
+}
+
 function role_check(r) {
 	var result = false;
 	$.getJSON("json/session.json", {}, function (data) {
@@ -77,7 +86,7 @@ function role_check(r) {
 
 function nav_check() {
 	if (login_check()) {
-		$("#navLogin").html('<a href="logout.php">Logout Now</a>');
+		$("#navLogin").html('<a id="logout" href="#">Logout Now</a>');
 		if (role_check("A")) {
 			$("#navHome").html('<a href="admin.html">Admin</a>');
 		}
