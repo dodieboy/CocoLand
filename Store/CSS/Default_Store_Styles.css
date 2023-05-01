@@ -205,6 +205,8 @@ ul {
     height: 100vh;
     margin: 0;
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
 section article {
