@@ -169,67 +169,12 @@ function removeProduce(id) {
 }
 
 function checkOut() {
-	for (var i = 1; i < $("#cartTable tr").length; i++) {
-		var pId = $("#cartTable")
-			.find("tr:eq(" + i + ")")
-			.find("td.pId")
-			.text();
-		var pName = $("#cartTable")
-			.find("tr:eq(" + i + ")")
-			.find("td.pName")
-			.text();
-		var pQuantity = $("#cartTable")
-			.find("tr:eq(" + i + ")")
-			.find("input")
-			.val();
-		var pPrice = $("#cartTable")
-			.find("tr:eq(" + i + ")")
-			.children("td.pPrice")
-			.text()
-			.replace(/[$]/g, "");
-		var totals = $("#sumTotal").text();
-		if (pName != "") {
-			$.ajax({
-				type: "POST",
-				url: "addCart.php",
-				data: {
-					type: "update" + i,
-					total: totals,
-					id: pId,
-					name: pName,
-					price: pPrice.replace(/[$]/g, ""),
-					quantity: pQuantity,
-				},
-				success: function (data) {
-					window.location = "payment.html";
-				},
-				error: function () {
-					alert("error");
-				},
-			});
-		}
-	}
+	window.location = "payment.html";
 }
 
 function orderProduce() {
 	if ($("#cardOutput").text() != "Card type: Not vaild") {
-		$.ajax({
-			type: "POST",
-			url: "order.php",
-			data: $("#checkOutFrom").serialize(),
-			success: function (data) {
-				if (data == "Added") {
-					clearCart();
-					window.location = "OrderComplete.html";
-				} else {
-					alert("Error\nPlease contact the administrator");
-					console.log(data);
-				}
-			},
-			error: function () {
-				alert("error");
-			},
-		});
+		window.location = "OrderComplete.html";
 	} else {
 		$("#card").focus();
 		$("#cardOutput").html("Card type: Not vaild").css({
