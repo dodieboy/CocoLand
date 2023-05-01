@@ -63,7 +63,7 @@ function login_check() {
 function logout() {
 	Cookies.remove("JWT");
 	Cookies.remove("Name");
-	nav_check()
+	nav_check();
 }
 
 function role_check(r) {
@@ -89,10 +89,11 @@ function nav_check() {
 		$("#navLogin").html('<a id="logout" href="#">Logout Now</a>');
 		if (role_check("A")) {
 			$("#navHome").html('<a href="admin.html">Admin</a>');
+			return;
 		}
-		return;
+	} else {
+		$("#navLogin").html('<a href="login.html">Login Now</a>');
 	}
-	$("#navLogin").html('<a href="login.html">Login Now</a>');
 	$("#navHome").html('<a href="index.html">Store</a>');
 }
 
