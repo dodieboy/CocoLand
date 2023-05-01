@@ -94,7 +94,8 @@ function cart_check(i) {
 			$("#navCart").html("<i class='fa-solid fa-cart-shopping'></i> (" + cart.length + ")");
 			return;
 		}
-		$("i.cart").attr("value", cart.length);
+		console.log(cart.length)
+		$("i.navCart").attr("value", cart.length);
 	}
 }
 
