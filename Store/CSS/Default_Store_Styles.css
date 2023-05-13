@@ -72,8 +72,8 @@ ul {
 #head h1 {
     font-size: 8vw;
     color: white;
-    padding-top: 35vh;
     margin: 0;
+    margin-top: 35vh;
 }
 
 .logo {
@@ -342,7 +342,7 @@ footer ul {
     #head h1 {
         font-size: 7vw;
         color: white;
-        padding-top: 33vh;
+        margin-top: 33vh;
     }
     /* footer */
     #social {
@@ -386,7 +386,7 @@ footer ul {
     #head h1 {
         font-size: 42px;
         color: #F59C1E;
-        padding-top: 42vh;
+        margin-top: 42vh;
     }
     .menu {
         float: right;
