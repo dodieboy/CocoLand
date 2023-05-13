@@ -24,6 +24,7 @@ video {
 
 *::--webkit-media-controls-play-button {
     display: none!important;
+	appearance: none;
     -webkit-appearance: none;
 }
 
