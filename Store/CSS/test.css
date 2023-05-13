@@ -199,6 +199,7 @@ ul {
 section.title {
 	text-align: center;
 	margin: 0;
+	background-color: aqua;
 }
 
 section.title h1 {
@@ -208,6 +209,12 @@ section.title h1 {
 	color: #f59c1e;
 }
 
+section h1 {
+	margin: 0;
+	font-size: 42px;
+	margin-top: 42vh;
+	color: #f59c1e;
+}
 section #itemImg {
 	height: 62vh;
 	padding-top: 30vh;
