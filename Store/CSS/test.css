@@ -49,6 +49,11 @@ ul {
 	padding: 0;
 }
 
+p,
+h1 {
+	color: white;
+}
+
 /* Header (nav) */
 
 .header {
@@ -194,57 +199,70 @@ ul {
 
 #fullpage section {
 	z-index: 10;
+	margin: 0;
+}
+
+section h1 {
+	font-size: 42px;
+	margin-top: 42vh;
+	color: #f59c1e;
 }
 
 section.title {
 	text-align: center;
-	margin: 0;
-	background-color: aqua;
 }
 
 section.title h1 {
-	margin: 0;
-	font-size: 42px;
-	margin-top: 42vh;
-	color: #f59c1e;
+	color: white;
 }
 
-section h1 {
-	margin: 0;
-	font-size: 42px;
-	margin-top: 42vh;
-	color: #f59c1e;
-}
 section #itemImg {
-	height: 62vh;
-	padding-top: 30vh;
+	margin-top: 30vh;
 	text-align: center;
 }
 
+section #itemImg img {
+	height: 160px;
+}
+
 .itemInfo {
-	position: relative;
+	position: absolute;
 	width: 92%;
 	left: 4%;
 	right: 4%;
 	bottom: 0;
-	text-align: start;
+	text-align: center;
 }
 
-.itemInfo p {
-	color: white;
-	font-size: 18px;
-	margin: 0;
-}
-
-.itemName {
-	float: left;
-	padding-top: 13px;
-}
 .cart button {
-	font-size: 20px;
-	padding: 10px;
-	width: 200px;
-	margin: 5px;
+    display: inline-block;
+    border-radius: 4px;
+    background-color: #f4511e;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 16px;
+    padding: 8px;
+    width: 180px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.cart button span {
+    cursor: pointer;
+    display: inline-block;
+    transition: 0.5s;
+}
+
+.cart button:hover:after {
+    content: 'Add To Cart \1F6D2';
+}
+
+.cart button:hover span {
+    display: none;
+    padding-right: 25px;
+    transition: 0.5s;
 }
 
 /* footer */
@@ -367,4 +385,24 @@ footer ul {
 		bottom: 0;
 		height: 8vh;
 	}
+
+	section #itemImg img {
+		height: 400px;
+	}
+    .itemInfo p {
+        font-size: 20px;
+    }
+    .itemName {
+        float: left;
+        padding-top: 13px;
+    }
+	.cart {
+        float: right;
+    }
+    .cart button {
+        font-size: 20px;
+        padding: 10px;
+        width: 200px;
+        margin: 5px;
+    }
 }
