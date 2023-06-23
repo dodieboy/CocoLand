@@ -20,6 +20,7 @@ This code is licensed under MIT license (See LICENSE.txt for details)
 
 /* content */
 /* cart */
+
 .cart button {
     display: inline-block;
     border-radius: 4px;
@@ -74,6 +75,11 @@ section .itemImg img {
 	right: 4%;
 	bottom: 0;
 	text-align: center;
+}
+
+.itemInfo p {
+    margin: 0;
+    margin-bottom: 5px;
 }
 
 .itemImg figure {
